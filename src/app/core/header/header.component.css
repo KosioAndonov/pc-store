@@ -9,10 +9,12 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 20px;
     overflow: hidden;
+    
+
 }
 
 header {
@@ -20,6 +22,8 @@ header {
     color: #fff;
     padding: 10px 0;
     text-align: center;
+    
+
 }
 
 #logo {
@@ -61,7 +65,31 @@ header {
 }
 
 .content {
-    margin-left: 220px;
+    width: 100%;
     /* Adjust based on the width of vertical-nav */
-    padding: 50px 20px;
+    padding: 30px 20px;
+    display:inline-flex;
+}
+
+nav {
+    border-top: 0px solid #00acf4;
+  }
+  
+  .logo {
+    font-size: 1.3em;
+    color: white;
+    padding-bottom: 0;
+  }
+  
+  .logo-wrap {
+    font-family: "Parisienne", cursive;
+    letter-spacing: 0.5em;
+    margin: 0.5em 0;
+  }
+  
+ .nav-wrapper{
+    display: inline;
+    position:static;
+    right: 20px;
+    border: 3px solid green;
 }

@@ -19,13 +19,16 @@ const routes: Routes = [
   {
     path: 'parts',
     component: PartsComponent,
-  },{
+  },
+  {
     path: 'about',
     component: AboutComponent,
   },
-  
+  {
+    path: 'auth',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+  },
   { path: 'error', component: ErrorComponent },
-
   { path: '**', component: NotFoundComponent },
 ];
 

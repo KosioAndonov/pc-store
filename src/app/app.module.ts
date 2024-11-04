@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { MainComponent } from './main/main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PartsComponent } from './parts/parts.component';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PartsComponent } from './parts/parts.component';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
+    UserModule,
 
   ],
   providers: [
