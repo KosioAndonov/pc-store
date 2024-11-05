@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+interface Profile {
+  username: string;
+  email: string;
+  tel: string;
+}
 
 @Component({
   selector: 'app-profile',
@@ -7,4 +13,5 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
 
+ 
 }

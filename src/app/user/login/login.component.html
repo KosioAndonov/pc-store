@@ -2,23 +2,57 @@
     <div class="title">
        Login 
     </div>
-    <form action="#">
+    <form  #form="ngForm" (ngSubmit)="login(form)">
        <div class="field">
-          <input type="text" required>
-          <label>Email Address</label>
+         <label>Email Address</label>
+
+          <input  class="input-error"
+          type="email"
+          name="email"
+          id="email"
+          ngModel
+          #inputEmail="ngModel"
+          required>
        </div>
+       <br>
+       <ng-container *ngIf="inputEmail.touched">
+         <p class="error" *ngIf="inputEmail.errors?.['required']">
+           Email is required!
+         </p>
+         <p class="error" *ngIf="inputEmail.errors?.['appEmailValidator']">
+           Email is not valid!
+         </p>
+       </ng-container>
+
        <div class="field">
-          <input type="password" required>
-          <label>Password</label>
+         <label>Password</label>
+          <input type="password"
+          name="password"
+          id="password"
+          #inputPassword="ngModel"
+          ngModel
+          required
+          minlength="5">
        </div>
+       <br>
+
+       <ng-container *ngIf="inputPassword.touched">
+         <p class="error" *ngIf="inputPassword.errors?.['required']">
+           Password is required!
+         </p>
+         <p class="error" *ngIf="inputPassword.errors?.['minlength']">
+           Password must be at least
+           {{inputPassword.errors?.['minlength']['requiredLength']}} characters!
+         </p>
+       </ng-container>
+
        <div class="content">
-          
           <div class="pass-link">
              <a href="#">Forgot password?</a>
           </div>
        </div>
        <div class="field">
-          <input type="submit" value="Login">
+          <input type="submit"  value="Login">
        </div>
        <div class="signup-link">
           Not a member? <a routerLink="/auth/register">Register</a>

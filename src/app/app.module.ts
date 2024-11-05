@@ -10,6 +10,9 @@ import { MainComponent } from './main/main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PartsComponent } from './parts/parts.component';
 import { UserModule } from './user/user.module';
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFireAuthModule} from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { UserModule } from './user/user.module';
     AppRoutingModule,
     CoreModule,
     UserModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
 
   ],
   providers: [

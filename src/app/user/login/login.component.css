@@ -52,17 +52,7 @@
 form .field input:valid{
   border-color: #4158d0;
 }
-.wrapper form .field label{
-  position: absolute;
-  top: 50%;
-  left: 20px;
-  color: #999999;
-  font-weight: 400;
-  font-size: 17px;
-  pointer-events: none;
-  transform: translateY(-50%);
-  transition: all 0.3s ease;
-}
+
 form .field input:focus ~ label,
 form .field input:valid ~ label{
   top: 0%;
