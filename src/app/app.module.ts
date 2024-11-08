@@ -13,6 +13,7 @@ import { UserModule } from './user/user.module';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { environment } from '../environments/environment';
     UserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    SharedModule
 
   ],
   providers: [
