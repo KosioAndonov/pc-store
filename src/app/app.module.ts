@@ -36,7 +36,6 @@ import { SharedModule } from './shared/shared.module';
 
   ],
   providers: [
-    provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })

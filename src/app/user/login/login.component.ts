@@ -12,14 +12,14 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
-  login(form: NgForm): void{
+   login(form: NgForm): void{
     if (form.invalid) {
       return;
   }
 
   const { email, password } = form.value;
 
-    this.authService.signIn(email, password).then(() =>{
+      this.authService.loginUser(email, password).then(() =>{
       this.router.navigate(['/']);
       console.log('logged in');
       
