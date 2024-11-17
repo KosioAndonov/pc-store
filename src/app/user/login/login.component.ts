@@ -10,6 +10,7 @@ import { NgForm } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  
   constructor(private authService: AuthService, private router: Router) {}
 
    login(form: NgForm): void{
@@ -18,11 +19,10 @@ export class LoginComponent {
   }
 
   const { email, password } = form.value;
-
+   
       this.authService.loginUser(email, password).then(() =>{
       this.router.navigate(['/']);
-      console.log('logged in');
-      
-    })
+      })
+    
 }
 }

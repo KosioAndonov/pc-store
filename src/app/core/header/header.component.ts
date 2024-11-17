@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../user/auth.service';
+import { User } from 'firebase/auth';
+
 
  
 
@@ -7,6 +10,17 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent{
+  //TODO: make logout functionality
+  constructor(private authService: AuthService) {}
 
+  get isLogged(): boolean{
+    return this.authService.isLogged;
+  }
+
+   logOut(): void{
+    this.authService.signOut();
+  }
 }
+
+   
