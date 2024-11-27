@@ -114,7 +114,7 @@
   blockquote,
   p {
     font-style: italic;
-    color: red;
+    color: rgb(8, 0, 124);
   }
   
   blockquote p + p {
