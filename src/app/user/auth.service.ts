@@ -2,8 +2,9 @@ import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from '../types/user';
 import { BehaviorSubject, Observable, Subscription, mergeMap, tap } from 'rxjs';
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, Unsubscribe } from "firebase/auth";
-
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, Unsubscribe, updateProfile, updatePhoneNumber } from "firebase/auth";
+import { Firestore, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore';
+import {getDatabase, ref, set} from 'firebase/database'
 @Injectable({
   providedIn: 'root'
 })
@@ -24,12 +25,48 @@ export class AuthService implements  OnDestroy{
 
   constructor(private afa: AngularFireAuth) { }
 
-  signUp(email:string, password:string){
-    return this.afa.createUserWithEmailAndPassword(email,password);
-  }
+  signUp(email:string, password:string, mobile: string){
+    const db = getFirestore();
+
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("phoneNumber", "==", mobile));
+    
+    return getDocs(q).then(async (querySnapshot) => {
+      if (!querySnapshot.empty) {
+        // Phone number already registered
+        
+        throw new Error("This phone number is already registered.");
+      }else{
+        this.afa.createUserWithEmailAndPassword(email,password).then( async params =>{
+          const uid = params.user?.uid
+          
+          
+          await setDoc(doc(db, "users", uid!), {
+            phoneNumber: mobile
+          }).catch(
+            (error) => {
+              throw error;
+              }
+          );
+    }).catch(
+      (error) => {
+        throw error;
+        }
+    );
+      }
+    })
+    
+  };
+
+  
+  
 
   signIn(email:string, password:string){
-    return this.afa.signInWithEmailAndPassword(email, password)
+    return this.afa.signInWithEmailAndPassword(email, password).catch(
+      (error) => {
+        throw error;
+        }
+    );;
     
   }
 
@@ -72,6 +109,27 @@ export class AuthService implements  OnDestroy{
       });
   }
 
+
+  getProfile(){
+    return this.user$$.value;
+  }
+
+  async getUserDetails(){
+    const user = this.user$$.value;
+    const uid = user.uid;
+    const db = getFirestore();
+    const docRef = doc(db, "users", uid);
+    
+   await getDoc(docRef).then((snapshot) => {
+    const userData = snapshot.data();
+    const phoneNumber =  userData?.['phoneNumber'];
+
+     return phoneNumber;
+    //TODO send phone number to profile Comp
+    })
+   
+    
+  }
 
   ngOnDestroy(): void {
     this.user$$.next(undefined); // Clear the user

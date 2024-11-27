@@ -43,7 +43,7 @@ register(): void{
     passGroup: { password },
   } = this.form.value;
   
-  this.authService.signUp(email,password).then(() =>{
+  this.authService.signUp(email,password, mobile).then(() =>{
     this.router.navigate(['/auth/login']);
   });
   

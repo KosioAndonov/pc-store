@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { log } from 'console';
-
+import { Computer } from '../types/computer';
 @Component({
   selector: 'app-computers',
   templateUrl: './computers.component.html',
   styleUrl: './computers.component.css'
 })
 export class ComputersComponent implements OnInit {
-  computers: any[] = [];
+  computers: Computer[] = [];
   constructor(private apiService : ApiService){ }
 
   
@@ -21,9 +21,7 @@ export class ComputersComponent implements OnInit {
           console.error(error);
           }
     );
-    
-    console.log(this.computers);
-    
+  
    }
    
 }
