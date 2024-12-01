@@ -120,14 +120,18 @@ export class AuthService implements  OnDestroy{
     const db = getFirestore();
     const docRef = doc(db, "users", uid);
     
-   await getDoc(docRef).then((snapshot) => {
-    const userData = snapshot.data();
-    const phoneNumber =  userData?.['phoneNumber'];
+    let phoneNumber = "";
+    let address = "";
 
-     return phoneNumber;
+    await getDoc(docRef).then((snapshot) => {
+    const userData = snapshot.data();
+    const userPhoneNumber =  userData?.['phoneNumber'];
+    const userAddress =  userData?.['address'];
+    phoneNumber = userPhoneNumber;
+    address = userAddress;
     //TODO send phone number to profile Comp
     })
-   
+   return {phoneNumber, address};
     
   }
 

@@ -10,16 +10,17 @@ import { Firestore, collection, getDoc, getDocs, getFirestore } from 'firebase/f
 export class ProfileComponent implements OnInit{
   user: any;
   phoneNumber:any;
-
+  address: any;
   constructor(private authService: AuthService){}
 
   ngOnInit(): void {
+    
     this.user = this.authService.getProfile(); 
-    this.authService.getUserDetails().then(userDetails =>{
-      console.log(userDetails);
+    this.authService.getUserDetails().then(details =>{
+      this.phoneNumber = details.phoneNumber;
+      this.address = details.address;
+      console.log(this.address);
       
-    });
-    
-    
+    })
   }
 }
