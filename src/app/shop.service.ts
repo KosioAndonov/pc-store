@@ -17,9 +17,13 @@ export class ShopService {
     this.saveCart(currentCart); 
   }
   removeFromCart(comp: any) {
-    const currentCart = this.cartSubject.value.filter((el: any) => el.id !== comp.id);
+    const currentCart = this.cartSubject.value;
+    const index = currentCart.findIndex((el: any) => el.id === comp.id);
+  if (index !== -1) {
+    currentCart.splice(index, 1);
     this.cartSubject.next(currentCart); 
     this.saveCart(currentCart); 
+  }
   }
 
 
