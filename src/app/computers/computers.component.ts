@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { log } from 'console';
 import { Computer } from '../types/computer';
+import { ShopService } from '../shop.service';
 @Component({
   selector: 'app-computers',
   templateUrl: './computers.component.html',
@@ -9,9 +10,10 @@ import { Computer } from '../types/computer';
 })
 export class ComputersComponent implements OnInit {
   computers: Computer[] = [];
-  constructor(private apiService : ApiService){ }
+  constructor(private apiService : ApiService, private shopService : ShopService){ }
 
   
+
    ngOnInit(): void {
     this.apiService.getComputers().then(  
       (response) => {
@@ -21,7 +23,11 @@ export class ComputersComponent implements OnInit {
           console.error(error);
           }
     );
-  
+
    }
+
+   buyComputer(computer: any){
+    this.shopService.addToCart(computer);
+  }
    
 }

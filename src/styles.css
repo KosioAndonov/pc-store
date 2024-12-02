@@ -175,4 +175,14 @@
     }
   }
   
+  .shopping-cart-icon {
+    text-decoration: none;
+    color: #000; /* Change color as needed */
+    font-size: 36px; /* Adjust size to make it bigger */
+    padding: 10px; /* Add padding */
+}
+
+.shopping-cart-icon:hover {
+    color: #007bff; /* Change color on hover */
+}
   
