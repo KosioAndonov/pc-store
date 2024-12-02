@@ -22,7 +22,6 @@ export class PartsComponent {
           }
     );
     
-    console.log(this.parts);
     
    }
 

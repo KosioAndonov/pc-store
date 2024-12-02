@@ -33,7 +33,6 @@ export class RegisterComponent  implements OnInit  {
 
 register(): void{
   if (this.form.invalid) {
-    console.log("invalid");
     return;
   }
 

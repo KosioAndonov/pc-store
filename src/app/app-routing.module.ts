@@ -5,6 +5,7 @@ import { PartsComponent } from './parts/parts.component';
 import { AboutComponent } from './about/about.component';
 import { ErrorComponent } from './core/error/error.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+  }, 
+  {
+    path: 'my-orders',
+    component: MyOrdersComponent,
   },
   {
     path: 'auth',

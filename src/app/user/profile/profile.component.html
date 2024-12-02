@@ -16,31 +16,16 @@
         </div>
     
         <div class="flex">
-          <p>Address:</p>
+          <p>Shipping address:</p>
           <p>{{address}}</p>
         </div>
 
-        <button class="edit-button" >Edit</button>
+        <button class="edit-button" (click)="toggleEditMode()" >Edit</button>
       </ng-container>
   
       <!-- EDIT MODE -->
-      <ng-container >
-        <form >
-          <!-- username input -->
-          <div class="flex">
-            <p>Username:</p>
-            <input type="text" id="username" formControlName="username" />
-          </div>
-  
-          <!-- username validations -->
-          <ng-container >
-            <p class="error" >
-              Username is required!
-            </p>
-            <p class="error" >
-              Username's length should not be less than 5!
-            </p>
-          </ng-container>
+      <ng-container  *ngIf="isEditMode">
+        <form [formGroup]="form">
   
           <!-- email input -->
           <div class="flex">
@@ -49,32 +34,30 @@
           </div>
   
           <!-- email validations -->
-          <ng-container >
+          <ng-container *ngIf="form.get('email')?.errors" >
+            
             <p class="error" >
-              Email is required!
-            </p>
-            <p
-              class="error"
-              
-            >
               Email is not valid!
             </p>
+
           </ng-container>
   
           <!-- telephone input -->
           <div class="flex">
             <p>Phone:</p>
             <div>
-              <select name="select-tel" id="select-tel" class="tel">
-                <option value="00359">+359</option>
-              </select>
-              <input type="text" id="tel" formControlName="tel" />
+              <input type="text" id="tel" formControlName="phoneNumber" />
             </div>
           </div>
   
+          <!-- address input -->
+          <div class="flex">
+            <p>Shipping address:</p>
+            <input type="text" id="address" formControlName="address" />
+          </div>
           <!-- ACTIONS -->
-          <button class="red-button">Cancel</button>
-          <button class="green-button">Save</button>
+          <button class="red-button" (click)="toggleEditMode()">Cancel</button>
+          <button class="green-button" (click)="updateUser()">Save</button>
         </form>
       </ng-container>
     </div>

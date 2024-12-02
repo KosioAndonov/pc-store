@@ -4,12 +4,13 @@
             <li *ngIf="!isLogged"><a routerLink="/auth/login"><strong>LOG IN</strong></a></li>
             <li *ngIf="!isLogged"><a routerLink="/auth/register"><strong>REGISTER</strong></a></li>
             <br>
-            <li><a routerLink="/auth/profile">Profile</a></li>
+            <li><a routerLink="/auth/profile" *ngIf="isLogged">Profile</a></li>
+            <li><a routerLink="/my-orders" *ngIf="isLogged">My Orders</a></li>
             <li><a routerLink="/computers">Computers</a></li>
             <li><a routerLink="/parts">Parts</a></li>
             <li><a routerLink="/about">About</a></li>
             <br>
-            <li *ngIf="isLogged" (click)="logOut()"><a><strong>LOGOUT</strong></a></li>
+            <li *ngIf="isLogged" (click)="logOut()" ><a><strong>LOGOUT</strong></a></li>
            
         </ul>
     </nav>

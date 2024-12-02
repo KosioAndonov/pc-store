@@ -14,6 +14,7 @@ import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
 import { SharedModule } from './shared/shared.module';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SharedModule } from './shared/shared.module';
     MainComponent,
     NotFoundComponent,
     PartsComponent,
+    MyOrdersComponent,
     
   ],
   imports: [

@@ -2,8 +2,8 @@ import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from '../types/user';
 import { BehaviorSubject, Observable, Subscription, mergeMap, tap } from 'rxjs';
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, Unsubscribe, updateProfile, updatePhoneNumber } from "firebase/auth";
-import { Firestore, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, Unsubscribe, updateProfile, updatePhoneNumber, updateEmail } from "firebase/auth";
+import { Firestore, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import {getDatabase, ref, set} from 'firebase/database'
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class AuthService implements  OnDestroy{
   private user$$ = new BehaviorSubject<any>(undefined);
   public user$ = this.user$$.asObservable();
   private unsubscribe!: Unsubscribe;
-
+isEditMode: boolean = false;
   user: User | undefined;
   USER_KEY = '[user]';
 
@@ -132,6 +132,44 @@ export class AuthService implements  OnDestroy{
     //TODO send phone number to profile Comp
     })
    return {phoneNumber, address};
+    
+  }
+
+
+  async  updateProfile(user : any){
+     if(user.email){
+      const auth = getAuth();
+      updateEmail(auth.currentUser!, user.email).then(()=>{
+        window.alert("Email changed!")
+      }).catch((error) => {
+        throw new Error(error)
+      });
+     }
+
+     if(user.phoneNumber || user.address){
+      const currentUser = this.user$$.value;
+      const uid = currentUser.uid;
+
+      const db = getFirestore();
+      const userRef = doc(db, "users", uid);
+
+      if(user.phoneNumber){
+        await updateDoc(userRef, {
+          phoneNumber: user.phoneNumber,
+        }).then(()=>{
+          window.alert("Phone number updated!")
+        })
+      }
+
+      if (user.address) {
+        await updateDoc(userRef, {
+          address: user.address,
+        }).then(()=>{
+          window.alert("Shipping address updated!")
+        })
+      }
+      
+     }
     
   }
 
