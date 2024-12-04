@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { doc, getFirestore } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -26,8 +27,6 @@ export class ShopService {
   }
   }
 
-
-
   private saveCart(cart: any[]) {
     localStorage.setItem('cart', JSON.stringify(cart)); 
   }
@@ -40,6 +39,16 @@ export class ShopService {
       return cart; // Return the cart
     }
     return []; // Return an empty array if no cart is found
+  }
+
+  order(cart:any){
+  //  const currentUser = this.userService.getUser();
+   // const uid = currentUser.uid
+    const db = getFirestore();
+   // const docRef = doc(db, "orders", );
+
+    //console.log(currentUser);
+    
   }
 }
 

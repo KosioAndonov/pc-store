@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable, Subscription, mergeMap, tap } from 'rxjs';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, Unsubscribe, updateProfile, updatePhoneNumber, updateEmail } from "firebase/auth";
 import { Firestore, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { getDatabase, ref, set } from 'firebase/database'
-import { UserService } from '../user.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,17 +22,15 @@ export class AuthService implements OnDestroy {
 
 
   get isLogged(): boolean {
-    console.log(this.userService.getUser() !== null);
     
-    return  this.userService.getUser() !== null;
-    //this.user$$.value !== undefined;
+    return  this.user$$.value !== undefined;
 
   }
 
  
 
 
-  constructor(private afa: AngularFireAuth,private userService: UserService) { 
+  constructor(private afa: AngularFireAuth) { 
     // this.subscription = this.user$.subscribe((user) => {
     //   this.user = user;
     // });
@@ -105,7 +102,6 @@ export class AuthService implements OnDestroy {
           this.user$$.next(undefined); // Clear the user
         }
       });
-      this.userService.setUser(this.user);
       localStorage.setItem('user', JSON.stringify(user));
 
 
@@ -120,7 +116,6 @@ export class AuthService implements OnDestroy {
   signOut() {
     this.afa.signOut().then(() => {
       this.user$$.next(undefined);
-      this.userService.clearUser();
       localStorage.clear();
     });
   }
@@ -145,7 +140,7 @@ export class AuthService implements OnDestroy {
       const userAddress = userData?.['address'];
       phoneNumber = userPhoneNumber;
       address = userAddress;
-      //TODO send phone number to profile Comp
+     
     })
     return { phoneNumber, address };
 

@@ -25,4 +25,7 @@ export class ShoppingCartComponent implements OnInit{
   removeComp(comp: any) {
     this.shopService.removeFromCart(comp); 
   }
+  makeOrder(cart:any){
+    this.shopService.order(cart);
+  }
 } 

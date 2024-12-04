@@ -25,13 +25,11 @@ export class ProfileComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    
     this.user = this.authService.getProfile(); 
+    
     this.authService.getUserDetails().then(details =>{
       this.phoneNumber = details.phoneNumber;
       this.address = details.address;
-    
-      
     })
   }
 
@@ -40,8 +38,6 @@ export class ProfileComponent implements OnInit{
   }
 
   updateUser():void{
-
-  
     this.authService.updateProfile(this.form.value).then(()=>{
 
       this.authService.getUserDetails().then(details =>{
