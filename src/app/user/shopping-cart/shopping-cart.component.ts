@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ShopService } from '../shop.service';
+import { ShopService } from '../../shop.service';
+import { AuthService } from '../auth.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,14 +11,17 @@ import { ShopService } from '../shop.service';
 export class ShoppingCartComponent implements OnInit{
   cart:any = [];
   totalPrice:number = 0;
-
-  constructor(private shopService: ShopService){}
+  user:any;
+  constructor(private shopService: ShopService,private as: AuthService){}
 
   ngOnInit(): void {
     this.shopService.cart$.subscribe(cart => {
       this.cart = cart; 
       this.calculateTotalPrice(); 
     });
+    
+    
+    
   }
 
   calculateTotalPrice() {
@@ -25,7 +30,15 @@ export class ShoppingCartComponent implements OnInit{
   removeComp(comp: any) {
     this.shopService.removeFromCart(comp); 
   }
-  makeOrder(cart:any){
-    this.shopService.order(cart);
+  async makeOrder(cart:any, totalPrice: number){
+    await this.shopService.order(cart, totalPrice).then(
+      (res) => {
+        this.cart = [];
+        this.totalPrice = 0;
+        alert(
+          `Order has been placed successfully.`
+        )
+      }
+    );
   }
 } 

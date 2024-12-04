@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { doc, getFirestore } from 'firebase/firestore';
+import { addDoc, collection, doc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from './user/auth.service';
+import { update } from 'firebase/database';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ export class ShopService {
   private cartSubject = new BehaviorSubject<any[]>([]);
   cart$ = this.cartSubject.asObservable(); 
   
-  constructor() {  this.loadCart();  }
+  constructor(private authService:AuthService) {  this.loadCart();  }
 
   addToCart(component:any) {
     const currentCart = this.cartSubject.value;
@@ -41,14 +43,15 @@ export class ShopService {
     return []; // Return an empty array if no cart is found
   }
 
-  order(cart:any){
-  //  const currentUser = this.userService.getUser();
-   // const uid = currentUser.uid
+   async order(cart:any, totalPrice: number){
+    const currentUser = this.authService.getProfile();
+    const uid = currentUser?.uid;
     const db = getFirestore();
-   // const docRef = doc(db, "orders", );
-
-    //console.log(currentUser);
+    const docRef = doc(db, "orders", uid);
+    const ordersCollection = collection(db, "orders");
+    await addDoc(ordersCollection, { uid: uid, order: cart, price: totalPrice });
     
+    //TODO : make cart$ be empty after order. show my orders 
   }
 }
 

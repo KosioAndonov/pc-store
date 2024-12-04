@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ErrorComponent } from '../core/error/error.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,11 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+        
+      },
+      {
+        path: 'shopping-cart',
+        component: ShoppingCartComponent,
         
       },
       { path: 'error', component: ErrorComponent },

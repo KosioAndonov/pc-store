@@ -22,6 +22,6 @@
     <div class="cart-summary">
         <h2>Cart Summary</h2>
         <p>Total: <span id="total-price">{{totalPrice}}$</span></p>
-        <button class="checkout-btn" (click)="makeOrder(cart)">Order</button>
+        <button class="checkout-btn" (click)="makeOrder(cart, totalPrice)">Order</button>
     </div>
 </div>

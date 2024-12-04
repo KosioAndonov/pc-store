@@ -6,7 +6,7 @@ import { AboutComponent } from './about/about.component';
 import { ErrorComponent } from './core/error/error.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ShoppingCartComponent } from './user/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
   {

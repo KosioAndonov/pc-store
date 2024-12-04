@@ -12,28 +12,24 @@ export class AuthService implements OnDestroy {
   private user$$ = new BehaviorSubject<any>(undefined);
   public user$ = this.user$$.asObservable();
   private unsubscribe!: Unsubscribe;
+  subscription: Subscription;
 
 
   isEditMode: boolean = false;
-  user: User | undefined;
+  user: User | any;
 
   USER_KEY = '[user]';
 
 
 
-  get isLogged(): boolean {
-    
-    return  this.user$$.value !== undefined;
-
+  get isLogged(): boolean { 
+    return   this.user$$.value !== undefined;
   }
 
- 
-
-
   constructor(private afa: AngularFireAuth) { 
-    // this.subscription = this.user$.subscribe((user) => {
-    //   this.user = user;
-    // });
+    this.subscription = this.user$.subscribe((user) => {
+      this.user = user;
+    });
   }
   
 
@@ -73,14 +69,7 @@ export class AuthService implements OnDestroy {
 
 
 
-  signIn(email: string, password: string) {
-    return this.afa.signInWithEmailAndPassword(email, password).catch(
-      (error) => {
-        throw error;
-      }
-    );;
 
-  }
 
   loginUser = async (email: string, password: string) => {
     const auth = getAuth();
@@ -122,7 +111,8 @@ export class AuthService implements OnDestroy {
 
 
   getProfile() {
-    return this.user$$.value;
+    return this.user;
+    // this.user$$.value;
   }
 
   async getUserDetails() {
@@ -185,6 +175,10 @@ export class AuthService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    
+    
     this.user$$.next(undefined); // Clear the user
+    this.subscription.unsubscribe();
+  
   }
 }

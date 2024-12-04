@@ -25,6 +25,9 @@ export class ComputersComponent implements OnInit {
           }
     );
 
+    console.log(this.authService.getProfile());
+    
+
    }
 
   

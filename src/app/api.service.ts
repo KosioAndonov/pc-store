@@ -38,7 +38,4 @@ export class ApiService {
      })
     return parts;
   }
-
-
-   
 }
