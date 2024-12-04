@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { SharedModule } from './shared/shared.module';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     PartsComponent,
     MyOrdersComponent,
     ShoppingCartComponent,
+    AuthenticateComponent,
     
   ],
   imports: [

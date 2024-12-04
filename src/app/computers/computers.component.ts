@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { log } from 'console';
 import { Computer } from '../types/computer';
 import { ShopService } from '../shop.service';
+import { AuthService } from '../user/auth.service';
 @Component({
   selector: 'app-computers',
   templateUrl: './computers.component.html',
@@ -10,7 +11,7 @@ import { ShopService } from '../shop.service';
 })
 export class ComputersComponent implements OnInit {
   computers: Computer[] = [];
-  constructor(private apiService : ApiService, private shopService : ShopService){ }
+  constructor(private apiService : ApiService, private shopService : ShopService, private authService: AuthService){ }
 
   
 
@@ -26,8 +27,14 @@ export class ComputersComponent implements OnInit {
 
    }
 
+  
    buyComputer(computer: any){
+    let isLogged = this.authService.isLogged;
+    if(isLogged){
     this.shopService.addToCart(computer);
+    }else{
+      alert("You must be logged in to buy a computer");
+      }
   }
    
 }

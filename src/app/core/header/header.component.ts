@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../user/auth.service';
 import { User } from 'firebase/auth';
+import { UserService } from '../../user.service';
 
 
  
