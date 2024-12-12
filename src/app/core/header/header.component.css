@@ -93,3 +93,42 @@ nav {
     right: 20px;
     border: 3px solid green;
 }
+
+/* admin */
+nav.admin-nav {
+    display: flex; /* Use flexbox for layout */
+    justify-content: flex-end; /* Align items to the end */
+    width: 100%;
+    background-color: #333; /* Light background for contrast */
+    padding: 10px 20px; /* Padding around the nav */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.admin-nav li {
+    display: inline-block; /* Align items horizontally */
+    margin-right: 20px; /* Space between items */
+}
+
+
+.admin-nav a {
+    text-decoration: none; /* Remove underline from links */
+    color: #ffffff; /* Primary link color */
+    font-weight: bold; /* Bold text for emphasis */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.admin-nav a:hover {
+    color: #0056b3; /* Darker color on hover */
+}
+
+.admin-nav a strong {
+    font-weight: normal; /* Make strong text normal weight */
+}
+
+.admin-nav li:last-child {
+    margin-right: 0;
+    font-size: 1.2em; /* Slightly larger font size for emphasis */
+    color: #ffffff; /* A different color to distinguish it */
+    text-align:right;
+}

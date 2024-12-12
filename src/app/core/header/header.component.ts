@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent{
+  isAdmin: boolean = true;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   get isLogged(): boolean{

@@ -4,11 +4,11 @@
             <li *ngIf="!isLogged"><a routerLink="/auth/login"><strong>LOG IN</strong></a></li>
             <li *ngIf="!isLogged"><a routerLink="/auth/register"><strong>REGISTER</strong></a></li>
             <br>
-            <li><a routerLink="/auth/profile" *ngIf="isLogged">Profile</a></li>
-            <li><a routerLink="/my-orders" *ngIf="isLogged">My Orders</a></li>
+            <li><a routerLink="/auth/profile" *ngIf="isLogged && !isAdmin">Profile</a></li>
+            <li><a routerLink="/my-orders" *ngIf="isLogged && !isAdmin">My Orders</a></li>
             <li><a routerLink="/computers">Computers</a></li>
             <li><a routerLink="/parts">Parts</a></li>
-            <li><a routerLink="/about">About</a></li>
+            <li><a routerLink="/about" *ngIf="!isAdmin" >About</a></li>
             <br>
             <li *ngIf="isLogged" (click)="logOut()" ><a><strong>LOGOUT</strong></a></li>
            
@@ -17,17 +17,28 @@
 
 
 
-    <section class="content">
+    <section *ngIf="!isAdmin" class="content">
         <div class="container">
             <h1>Welcome to PC STORE</h1>
             <p>Get plenty of knowledge by our wonderful courses.</p>
         </div>
-     
-        
+
         <a *ngIf="isLogged" routerLink="/shopping-cart" class="shopping-cart-icon">
             <i class="fas fa-shopping-cart"></i>
         </a>
     </section>
+
+       <nav class="admin-nav" *ngIf="isLogged && isAdmin" >
+        <li >
+            <a routerLink="/admin/add-new"><strong>Add New</strong></a>
+        </li>
+        <li>
+            <a routerLink="/admin/view-orders"><strong>View Orders</strong></a>
+        </li>
+        <li>
+            <strong>Welcome Admin!</strong>
+        </li>
+        </nav>
 
     
     
