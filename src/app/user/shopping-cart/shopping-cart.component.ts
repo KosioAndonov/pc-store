@@ -12,9 +12,15 @@ export class ShoppingCartComponent implements OnInit{
   cart:any = [];
   totalPrice:number = 0;
   user:any;
-  constructor(private shopService: ShopService,private as: AuthService){}
+  shippingAddress:any;
 
-  ngOnInit(): void {
+  constructor(private shopService: ShopService,private authService: AuthService){}
+
+  async ngOnInit() {
+    await  this.authService.getUserDetails().then(details =>{
+      this.shippingAddress = details.address;
+   })
+
     this.shopService.cart$.subscribe(cart => {
       this.cart = cart; 
       this.calculateTotalPrice(); 

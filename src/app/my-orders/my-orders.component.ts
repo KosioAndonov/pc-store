@@ -11,10 +11,12 @@ export class MyOrdersComponent implements OnInit {
   uid!: string | null;
   orders!: any[];
   currentUser: any;
+  shippingAddress:any;
 
   constructor(private authService: AuthService, private apiService: ApiService) {
     this.uid = null;
     this.orders = [];
+    this.shippingAddress = null;
   }
 
   async reloadOrderList(): Promise<void> {
@@ -38,6 +40,10 @@ export class MyOrdersComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.currentUser = this.authService.getProfile();
     this.uid = this.currentUser?.uid;
+   
+    await  this.authService.getUserDetails().then(details =>{
+       this.shippingAddress = details.address;
+    })
 
     if (this.uid) {
       await this.getOrders();

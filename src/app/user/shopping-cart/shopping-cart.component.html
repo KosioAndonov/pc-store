@@ -19,8 +19,13 @@
             </tr>
         </tbody>
     </table>
+    
     <div class="cart-summary">
         <h2>Cart Summary</h2>
+        <div class="shipping-container">
+            <p class="shippingAddress">Shipping address: {{shippingAddress}}</p>
+            <button routerLink="/auth/profile" class="change-button">Change</button>
+            </div> 
         <p>Total: <span id="total-price">{{totalPrice}}$</span></p>
         <button class="checkout-btn" (click)="makeOrder(cart, totalPrice)">Order</button>
     </div>

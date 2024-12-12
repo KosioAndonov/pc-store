@@ -1,5 +1,11 @@
 <div class="orders-container">
     <h1>My Orders</h1>
+
+    <div class="shipping-container">
+    <p class="shippingAddress">Shipping address: {{shippingAddress}}</p>
+    <button routerLink="/auth/profile" class="change-button">Change</button>
+    </div> 
+    
     <div *ngIf="!orders">
         Loading orders...
     </div>
