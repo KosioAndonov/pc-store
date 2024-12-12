@@ -110,7 +110,7 @@ export class AuthService implements OnDestroy {
   }
 
 
-  getProfile() {
+    getProfile() {
     return this.user;
     // this.user$$.value;
   }

@@ -50,6 +50,5 @@ export class ProfileComponent implements OnInit{
     }).catch((error)=>{
       throw new Error(error.message);
     })
-    // TODO: PUT form value and update user
   }
 }

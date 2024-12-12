@@ -1,1 +1,45 @@
-<p>my-orders works!</p>
+<div class="orders-container">
+    <h1>My Orders</h1>
+    <div *ngIf="!orders">
+        Loading orders...
+    </div>
+
+    <ul class="order-list" *ngIf="orders">
+        <li *ngFor="let o of orders" class="order-item" >
+            <div  class="order-summary">
+                <span>Order:</span>
+                <span class="total-price">{{o.price}}$</span>
+            </div>
+            <div class="order-details">
+                <p *ngFor="let comp of o.order">{{comp.id}}</p>
+                <button class="cancel-button" (click)="cancelOrder(o.id)">Cancel</button>
+            </div>
+        </li>
+ 
+    </ul>
+</div>
+
+
+
+<!-- <h1>My Orders</h1>
+<ul class="order-list">
+
+    <div *ngIf="!orders">
+        Loading orders...
+    </div>
+
+    <div class="orders-container">
+     
+               
+ <ul>
+    <div *ngIf="orders">
+    <li  *ngFor="let o of orders" class="order-item">
+
+            <span *ngFor="let comp of o.order">{{comp.id}}</span>
+            <span class="total-price" >Total price:{{o.price}}$</span>
+            <button class="cancel-button" >Cancel Order</button>
+            <br>
+    </li>
+    </div>
+    
+ </ul> -->

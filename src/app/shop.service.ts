@@ -51,7 +51,10 @@ export class ShopService {
     const ordersCollection = collection(db, "orders");
     await addDoc(ordersCollection, { uid: uid, order: cart, price: totalPrice });
     
-    //TODO : make cart$ be empty after order. show my orders 
+  }
+
+  clearCart() {
+    this.cartSubject.next([]); 
   }
 }
 

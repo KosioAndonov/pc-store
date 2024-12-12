@@ -33,6 +33,7 @@ export class ShoppingCartComponent implements OnInit{
   async makeOrder(cart:any, totalPrice: number){
     await this.shopService.order(cart, totalPrice).then(
       (res) => {
+        this.shopService.clearCart();
         this.cart = [];
         this.totalPrice = 0;
         alert(

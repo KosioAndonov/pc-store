@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../user/auth.service';
 import { User } from 'firebase/auth';
+import { Router } from '@angular/router';
 
 
  
@@ -11,8 +12,7 @@ import { User } from 'firebase/auth';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent{
-  //TODO: make logout functionality
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   get isLogged(): boolean{
     return this.authService.isLogged;
@@ -20,6 +20,7 @@ export class HeaderComponent{
 
    logOut(): void{
     this.authService.signOut();
+    this.router.navigate(['/']);
   }
 }
 
