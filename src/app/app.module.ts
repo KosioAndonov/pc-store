@@ -17,6 +17,11 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { ShoppingCartComponent } from './user/shopping-cart/shopping-cart.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { AdminModule } from './admin/admin.module';
+import { ApiService } from './api.service';
+import { initializeApp } from 'firebase/app';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -31,19 +36,24 @@ import { AdminModule } from './admin/admin.module';
     
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     UserModule,
     AngularFireAuthModule,
-    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     SharedModule,
     AdminModule,
-
+    ReactiveFormsModule
   ],
   providers: [
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    // Initialize Firebase
+
+  }
+
+ }

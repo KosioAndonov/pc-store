@@ -12,9 +12,13 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent{
-  isAdmin: boolean = true;
+  isAdmin: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+    this.authService.isAdmin$.subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+    });
+  }
 
   get isLogged(): boolean{
     return this.authService.isLogged;

@@ -14,8 +14,11 @@ export class AuthService implements OnDestroy {
   private unsubscribe!: Unsubscribe;
   subscription: Subscription;
 
+  private isAdmin$$ = new BehaviorSubject<boolean>(false);
+  public isAdmin$ = this.isAdmin$$.asObservable();
 
-  isEditMode: boolean = false;
+  private adminEmail = 'admin@admin.com'
+
   user: User | any;
 
   USER_KEY = '[user]';
@@ -42,7 +45,6 @@ export class AuthService implements OnDestroy {
     return getDocs(q).then(async (querySnapshot) => {
       if (!querySnapshot.empty) {
         // Phone number already registered
-
         throw new Error("This phone number is already registered.");
       } else {
         this.afa.createUserWithEmailAndPassword(email, password).then(async params => {
@@ -66,11 +68,6 @@ export class AuthService implements OnDestroy {
 
   };
 
-
-
-
-
-
   loginUser = async (email: string, password: string) => {
     const auth = getAuth();
     try {
@@ -78,7 +75,6 @@ export class AuthService implements OnDestroy {
       // Signed in
       const user = userCredential.user;
 
-      // You can store user info in your application state or context
       this.user$$.next(user);
       this.unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -88,16 +84,19 @@ export class AuthService implements OnDestroy {
           // Update the BehaviorSubject with the user
         } else {
           console.log("No user is signed in.");
-          this.user$$.next(undefined); // Clear the user
+          this.user$$.next(undefined); 
         }
       });
       localStorage.setItem('user', JSON.stringify(user));
 
+      if(email == this.adminEmail){
+        this.isAdmin$$.next(true);
+      }
 
-      return user; // Return user for further use if needed
+      return user; 
     } catch (error) {
       console.error("Error logging in:", error);
-      throw error; // Handle the error as needed
+      throw error; 
     }
   };
 
@@ -107,6 +106,7 @@ export class AuthService implements OnDestroy {
       this.user$$.next(undefined);
       localStorage.clear();
     });
+    this.isAdmin$$.next(false);
   }
 
 
@@ -117,7 +117,7 @@ export class AuthService implements OnDestroy {
 
   async getUserDetails() {
     const user = this.user$$.value;
-    const uid = user.uid;
+    const uid = user?.uid;
     const db = getFirestore();
     const docRef = doc(db, "users", uid);
 
@@ -179,6 +179,6 @@ export class AuthService implements OnDestroy {
     
     this.user$$.next(undefined); // Clear the user
     this.subscription.unsubscribe();
-  
+    this.isAdmin$$.next(false);
   }
 }

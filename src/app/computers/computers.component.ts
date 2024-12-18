@@ -11,33 +11,33 @@ import { AuthService } from '../user/auth.service';
 })
 export class ComputersComponent implements OnInit {
   computers: Computer[] = [];
-  constructor(private apiService : ApiService, private shopService : ShopService, private authService: AuthService){ }
+  constructor(private apiService: ApiService, private shopService: ShopService, private authService: AuthService) { }
 
-  
 
-   ngOnInit(): void {
-    this.apiService.getComputers().then(  
+
+  ngOnInit() {
+    this.initializeComputers();
+  }
+
+  private initializeComputers() {
+    this.apiService.getComputers().then(
       (response) => {
         this.computers = response;
-        },
-        (error) => {
-          console.error(error);
-          }
-    );
-
-    console.log(this.authService.getProfile());
-    
-
-   }
-
-  
-   buyComputer(computer: any){
-    let isLogged = this.authService.isLogged;
-    if(isLogged){
-    this.shopService.addToCart(computer);
-    }else{
-      alert("You must be logged in to buy a computer");
+      },
+      (error) => {
+        console.error(error);
       }
+    );
   }
-   
+
+
+  buyComputer(computer: any) {
+    let isLogged = this.authService.isLogged;
+    if (isLogged) {
+      this.shopService.addToCart(computer);
+    } else {
+      alert("You must be logged in to buy a computer");
+    }
+  }
+
 }
