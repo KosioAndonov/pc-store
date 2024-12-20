@@ -1,0 +1,22 @@
+<div class="details-container">
+  <div class="details-card">
+    <div class="image-container">
+      <img class="details-image" src="{{component.img}}" alt=" Image">
+    </div>
+    <div class="details-content">
+      <h1 class="computer-id">{{component.id}}</h1>
+      <p class="price">{{component.price}}$</p>
+      <p class="description"><strong>Description:</strong> {{component.description}}</p>
+      <div class="specifications">
+        <p><strong>Processor:</strong> {{component.processor}}</p>
+        <p><strong>Video Card:</strong> {{component.videoCard}}</p>
+        <p><strong>RAM:</strong> {{component.ram}}</p>
+        <p><strong>Memory:</strong> {{component.memory}}</p>
+      </div>
+      <div class="button-group">
+        <button class="add-to-cart-btn" (click)="buyComponent(component)">Add to Cart</button>
+        <button class="back-btn" (click)="goBack()">Back</button>
+      </div>
+    </div>
+  </div>
+</div>

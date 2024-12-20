@@ -7,6 +7,7 @@ import { ErrorComponent } from './core/error/error.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { ShoppingCartComponent } from './user/shopping-cart/shopping-cart.component';
+import { DetailsComponent } from './details/details.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,9 @@ const routes: Routes = [
   },{
     path: 'shopping-cart',
     component: ShoppingCartComponent,
+  },{
+    path: 'details/:id',
+    component: DetailsComponent,
   },
   {
     path: 'auth',

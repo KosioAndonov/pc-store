@@ -1,7 +1,9 @@
 <div class="container" >
 <div *ngFor="let computer of computers">
   <div class="card">
-    <img class="image" src="{{computer.img}}" alt="image error" >
+    <a [routerLink]="['/details', computer.id]">
+      <img class="image" src="{{computer.img}}" alt="image error">
+    </a>
     <h1>{{computer.id}}</h1>
     <p class="price">{{computer.price}}$</p>
     <p><strong>Processor:</strong> {{computer.processor}}</p>

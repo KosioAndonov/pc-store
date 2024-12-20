@@ -20,6 +20,7 @@ import { AdminModule } from './admin/admin.module';
 import { ApiService } from './api.service';
 import { initializeApp } from 'firebase/app';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DetailsComponent } from './details/details.component';
 
 
 
@@ -33,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MyOrdersComponent,
     ShoppingCartComponent,
     AuthenticateComponent,
+    DetailsComponent,
     
   ],
   imports: [
