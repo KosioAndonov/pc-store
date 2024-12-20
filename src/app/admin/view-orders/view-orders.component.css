@@ -1,0 +1,71 @@
+.view-orders-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.orders-table th, .orders-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.orders-table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.orders-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+button:focus {
+    outline: none;
+}
+
+
+.shipping-address {
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px; /* Space inside the box */
+    background-color: #f9f9f9; /* Light background color */
+    margin: 20px 0; /* Space above and below the box */
+    font-family: Arial, sans-serif; /* Font style */
+}
+
+.shipping-address p {
+    margin: 5px 0; /* Space between paragraphs */
+    color: #333; /* Dark gray text color */
+}
+
+.shipping-address p:first-child {
+    font-weight: bold; /* Bold for the title */
+    font-size: 1.2em; /* Slightly larger font size */
+}

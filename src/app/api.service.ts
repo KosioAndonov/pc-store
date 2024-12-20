@@ -135,8 +135,6 @@ async getComponentById(id: string) {
     }
     }
 
-
-
     async deleteComponent(collection:any , id:any){
       const db = getFirestore();
       const docRef = doc(db, collection, id);
@@ -145,6 +143,43 @@ async getComponentById(id: string) {
         } catch (error) {
           console.error("Error deleting order: ", error);
           }
+    }
+
+    //Get orders
+    async getOrders() {
+      const db = getFirestore();
+      const colRef = collection(db, 'orders');
+      let orders: any[] = [];
+  
+      await getDocs(colRef).then((snapshot) => {
+  
+        snapshot.docs.forEach((doc) => {
+          orders.push({ ...doc.data(), id: doc.id });
+  
+        })
+      })
+      return orders;
+    }
+
+
+    async getUserDetails(uid:any) {
+     
+      const db = getFirestore();
+      const docRef = doc(db, "users", uid);
+  
+      let phoneNumber = "";
+      let address = "";
+  
+      await getDoc(docRef).then((snapshot) => {
+        const userData = snapshot.data();
+        const userPhoneNumber = userData?.['phoneNumber'];
+        const userAddress = userData?.['address'];
+        phoneNumber = userPhoneNumber;
+        address = userAddress;
+       
+      })
+      return { phoneNumber, address };
+  
     }
   }
 

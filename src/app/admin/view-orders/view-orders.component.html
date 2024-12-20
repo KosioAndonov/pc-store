@@ -1,1 +1,40 @@
-<p>view-orders works!</p>
+<div class="view-orders-container">
+    <h1>View Orders</h1>
+    
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Total Price</th>
+          <th>Actions</th>
+        </tr>
+        
+      </thead>
+      <tbody>
+        <div class="shipping-address" *ngIf="userDetails" >
+          <p>Shipping Address:</p>
+          <p >{{ userDetails.phoneNumber }}</p>
+          <p >{{ userDetails.address }}</p>
+        </div>
+        <tr *ngFor="let order of orders">
+          <td>
+            <ul>
+                <li *ngFor="let item of order.order">
+                    {{ item?.id }} 
+                </li>
+            </ul>
+        </td>
+        <td>{{ order.price }}$</td>
+          <td>
+            <button (click)="viewAddress(order.uid)">Address</button>
+            <button (click)="deleteOrder(order.id)">Ready</button> 
+          </td>
+        </tr>
+       
+
+       
+       
+      </tbody>
+     
+    </table>
+  </div>
