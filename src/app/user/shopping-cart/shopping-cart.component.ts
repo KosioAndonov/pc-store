@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../../shop.service';
 import { AuthService } from '../auth.service';
-import { error } from 'console';
+
 
 @Component({
   selector: 'app-shopping-cart',

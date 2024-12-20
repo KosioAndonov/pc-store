@@ -8,7 +8,11 @@
     <p><strong>Video card:</strong> {{computer.videoCard}}</p>
     <p><strong>Ram:</strong> {{computer.ram}}</p>
     <p><strong>Memory:</strong> {{computer.memory}}</p>
-    <p><button (click)="buyComputer(computer)"><strong>Add to Cart</strong></button></p>
+    <p class="button-group" *ngIf="isAdmin">
+      <button class="delBtn" (click)="deleteComponent(computer.id)"><strong>Delete</strong></button>
+      <button class="editBtn" (click)="editComponent(computer.id)"><strong>Edit</strong></button>
+  </p>
+    <p><button class="addBtn" (click)="buyComputer(computer)"><strong>Add to Cart</strong></button></p>
   </div>
 
 

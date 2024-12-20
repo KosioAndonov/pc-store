@@ -45,7 +45,7 @@
     transform: scale(1.05); /* Slightly enlarge the card on hover */
   }
 
-  .card button {
+  .addBtn {
     margin-top: auto;
     color: white;
     background-color: #000;
@@ -59,7 +59,41 @@
   }
   
   
-  .card button:hover {
+  .addBtn:hover {
     background-color: #444; /* Darker background on hover */
     opacity: 0.9; /* Slightly decrease opacity */
   }
+
+
+  .delBtn{
+    color: #eee;
+    padding: 7px 13px;
+    border: none;
+    border-radius: 1px;
+    background: rgba(255, 0, 0, 0.622);
+  }
+  .delBtn:hover{
+    background: #c0392b;
+  }
+  .delBtn:active{
+    background: #e74c3c;
+  }
+
+  .editBtn{
+    color: #eee;
+    padding: 7px 13px;
+    border: none;
+    border-radius: 1px;
+    background: rgba(0, 0, 0, 0.622);
+  }
+  .editBtn:hover{
+    background: #2521203b;
+  }
+  .editBtn:active{
+    background: #2521203b;
+  }
+
+  .button-group {
+    display: flex; /* Use flexbox to align buttons horizontally */
+    gap: 160px; /* Space between buttons */
+}

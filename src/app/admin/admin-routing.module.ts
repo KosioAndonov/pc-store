@@ -11,6 +11,11 @@ const routes: Routes = [
 
     },
     {
+        path: 'add-new/:id',
+        component: AddNewComponent,
+
+    },
+    {
         path: 'view-orders',
         component: ViewOrdersComponent,
 

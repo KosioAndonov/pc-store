@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { log } from 'console';
 import { Computer } from '../types/computer';
 import { ShopService } from '../shop.service';
 import { AuthService } from '../user/auth.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-computers',
   templateUrl: './computers.component.html',
@@ -11,12 +12,19 @@ import { AuthService } from '../user/auth.service';
 })
 export class ComputersComponent implements OnInit {
   computers: Computer[] = [];
-  constructor(private apiService: ApiService, private shopService: ShopService, private authService: AuthService) { }
+  isAdmin: boolean = false;
+  
+  constructor(private apiService: ApiService, private shopService: ShopService, private authService: AuthService, private router: Router) {
+    this.authService.isAdmin$.subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+    });
+   }
 
 
 
   ngOnInit() {
     this.initializeComputers();
+    
   }
 
   private initializeComputers() {
@@ -38,6 +46,25 @@ export class ComputersComponent implements OnInit {
     } else {
       alert("You must be logged in to buy a computer");
     }
+  }
+
+  deleteComponent(id:any){
+    this.apiService.deleteComponent('computers', id).then(
+      () => {
+          // Reload the computers after successful deletion
+          this.initializeComputers();
+          // Show a success message to the user
+          alert("Computer has been deleted successfully.");
+      },
+      (error) => {
+          console.error(error);
+          // Show an error message to the user
+          alert("An error occurred while deleting the computer.");
+      })
+  }
+
+  editComponent(id:any){
+   this.router.navigate(['/admin/add-new', id])
   }
 
 }

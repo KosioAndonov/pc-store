@@ -78,12 +78,8 @@ export class AuthService implements OnDestroy {
       this.user$$.next(user);
       this.unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
-
-          console.log("User  is signed in:");
           this.user$$.next(user);
-          // Update the BehaviorSubject with the user
         } else {
-          console.log("No user is signed in.");
           this.user$$.next(undefined); 
         }
       });

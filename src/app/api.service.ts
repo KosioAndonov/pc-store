@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { Firestore, addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { environment } from '../environments/environment';
 import { initializeApp } from 'firebase/app';
 import { log } from 'console';
@@ -30,6 +30,31 @@ export class ApiService {
 
     return computers;
   }
+
+  // Get Component by ID
+async getComponentById(id: string) {
+  const db = getFirestore();
+  const  docRefComputer = doc(db, 'computers', id);
+  let component: any = null;
+  let type:string = 'computer';
+
+  try {
+    const docSnap = await getDoc(docRefComputer);
+
+    if (docSnap.exists()) {
+      component = { id: docSnap.id, ...docSnap.data(),type:'computer' };
+    } else {
+      const docRefPart = doc(db, 'parts', id);
+      const docSnap = await getDoc(docRefPart);
+      component = { id: docSnap.id, ...docSnap.data(), type:'part' };
+      
+    }
+  } catch (error) {
+    console.error("Error fetching computer: ", error);
+  }
+
+  return component;
+}
 
   //GET PARTS
   async getParts() {
@@ -72,14 +97,12 @@ export class ApiService {
 
     try {
       await deleteDoc(docRef); // Delete the document
-      console.log(`Order with ID ${id} has been deleted.`);
     } catch (error) {
       console.error("Error deleting order: ", error);
     }
   }
 
   async addComponent(selectedValue: string, form: any) {
-    console.log(selectedValue, form);
     const db = getFirestore();
 
     if (selectedValue == "computer") {
@@ -93,7 +116,6 @@ export class ApiService {
         processor: form.processor,
       };
 
-      console.log(form);
       
       await setDoc(doc(db, 'computers', form.id), docData);
 
@@ -107,11 +129,22 @@ export class ApiService {
         type: form.type,
       };
 
-      console.log(form);
       
       await setDoc(doc(db, 'parts', form.id), docData);
 
     }
+    }
+
+
+
+    async deleteComponent(collection:any , id:any){
+      const db = getFirestore();
+      const docRef = doc(db, collection, id);
+      try {
+        await deleteDoc(docRef); // Delete the document
+        } catch (error) {
+          console.error("Error deleting order: ", error);
+          }
     }
   }
 
