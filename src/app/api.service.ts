@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
-import { environment } from '../environments/environment';
-import { initializeApp } from 'firebase/app';
-import { log } from 'console';
+import {  collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+ 
+ 
+constructor(){
+}
 
-
-  constructor() {
-    initializeApp(environment.firebaseConfig);
-  }
 
   //GET COMPUTERS
   async getComputers() {
     const db = getFirestore();
-    const colRef = collection(db, 'computers');
+    const colRef = collection(db, 'computers' );
     let computers: any[] = [];
 
     await getDocs(colRef).then((snapshot) => {
@@ -30,13 +28,12 @@ export class ApiService {
 
     return computers;
   }
-
+ 
   // Get Component by ID
 async getComponentById(id: string) {
   const db = getFirestore();
   const  docRefComputer = doc(db, 'computers', id);
   let component: any = null;
-  let type:string = 'computer';
 
   try {
     const docSnap = await getDoc(docRefComputer);

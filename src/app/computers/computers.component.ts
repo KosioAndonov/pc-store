@@ -18,16 +18,18 @@ export class ComputersComponent implements OnInit {
     this.authService.isAdmin$.subscribe(isAdmin => {
       this.isAdmin = isAdmin;
     });
+
+    this.initializeComputers();
+
    }
 
 
 
   ngOnInit() {
-    this.initializeComputers();
-    
   }
 
-  private initializeComputers() {
+  private  initializeComputers() {
+  
     this.apiService.getComputers().then(
       (response) => {
         this.computers = response;
@@ -51,14 +53,11 @@ export class ComputersComponent implements OnInit {
   deleteComponent(id:any){
     this.apiService.deleteComponent('computers', id).then(
       () => {
-          // Reload the computers after successful deletion
           this.initializeComputers();
-          // Show a success message to the user
           alert("Computer has been deleted successfully.");
       },
       (error) => {
           console.error(error);
-          // Show an error message to the user
           alert("An error occurred while deleting the computer.");
       })
   }

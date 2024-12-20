@@ -8,12 +8,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { ShoppingCartComponent } from './user/shopping-cart/shopping-cart.component';
 import { DetailsComponent } from './details/details.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     redirectTo: '/computers',
+    
   },
   {
     path: 'computers',
@@ -30,9 +32,11 @@ const routes: Routes = [
   {
     path: 'my-orders',
     component: MyOrdersComponent,
+     canActivate: [AuthGuard]
   },{
     path: 'shopping-cart',
     component: ShoppingCartComponent,
+    canActivate: [AuthGuard]
   },{
     path: 'details/:id',
     component: DetailsComponent,

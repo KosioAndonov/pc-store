@@ -14,7 +14,18 @@ export class DetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router,
      private apiService : ApiService, private shopService: ShopService,
-     private authService: AuthService) {}
+     private authService: AuthService) {
+      this.component = {
+        img: '',
+        id: '',
+        price: Number,
+        description: '',
+        processor: '',
+        videoCard: '',
+        ram: '',
+        memory: ''
+      };
+     }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

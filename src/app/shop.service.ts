@@ -27,24 +27,9 @@ export class ShopService {
   if (index !== -1) {
     currentCart.splice(index, 1);
     this.cartSubject.next(currentCart); 
-    // this.saveCart(currentCart); 
   }
   }
 
-  //  saveCart(cart: any[]) {
-  //   localStorage.setItem('cart', JSON.stringify(cart)); 
-  // }
-
-  //  loadCart(): any {
-    
-  //   const cartData = localStorage.getItem('cart');
-  //   if (cartData != null) {
-  //     const cart = JSON.parse(cartData);
-  //     this.cartSubject.next(cart); // Emit the loaded cart value
-  //     return cart; // Return the cart
-  //   }
-  //   return []; // Return an empty array if no cart is found
-  // }
 
    async order(cart:any, totalPrice: number){
     const currentUser = this.authService.getProfile();
